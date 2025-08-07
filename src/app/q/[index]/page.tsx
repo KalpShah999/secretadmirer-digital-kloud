@@ -10,7 +10,7 @@ import { scavengerSteps } from "@/lib/scavengerConfig";
 import { useScavengerProgress } from "@/hooks/useScavengerProgress";
 
 interface PageProps {
-  params: Promise<{ index: string }> | { index: string };
+  params?: Promise<{ index: string }>; // Next passes params as a Promise
 }
 
 export default function QuestionPage({ params }: PageProps) {
