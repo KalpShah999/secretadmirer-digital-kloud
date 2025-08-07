@@ -20,26 +20,40 @@ export default function QuestionPage({ params }: PageProps) {
   const router = useRouter();
   const { progress, markStepCompleted } = useScavengerProgress();
 
-  // Handle redirection based on current progress
+  // Consolidated redirect logic
   React.useEffect(() => {
+    console.log("Redirect check:", { stepIndex, progress, totalSteps: scavengerSteps.length });
+    
+    // Only redirect if we have valid progress data
+    if (progress === undefined || progress === null) {
+      console.log("Progress not ready yet");
+      return;
+    }
+    
+    const step = scavengerSteps[stepIndex];
+    
+    // If step doesn't exist, redirect to first question
+    if (!step) {
+      console.log("Step doesn't exist, redirecting to /q/0");
+      router.replace("/q/0");
+      return;
+    }
+    
     // If the hunt is completed, always show the completed page
     if (progress >= scavengerSteps.length) {
+      console.log("Hunt completed, redirecting to /q/completed");
       router.replace("/q/completed");
       return;
     }
+    
     // Prevent user from jumping ahead
     if (stepIndex > progress) {
+      console.log("Jumping ahead, redirecting to /q/" + progress);
       router.replace(`/q/${progress}`);
     }
   }, [stepIndex, progress, router]);
 
   const step = scavengerSteps[stepIndex];
-
-  // If step doesn't exist, redirect home
-  if (!step) {
-    if (typeof window !== "undefined") router.replace("/q/0");
-    return null;
-  }
 
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState<string | null>(null);

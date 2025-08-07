@@ -27,7 +27,7 @@ export const scavengerSteps: ScavengerStep[] = [
   {
     prompt: "You are my sunshine,<br>that shines on me every day,<br>and makes me smile.",
     answer: "light",
-    images: ["img_5.png", "img_23.png", "img_11.png", "img_8.png"],
+    images: ["img_5.png", "img_23.png", "img_11.png", "img_19.png"],
   },
   {
     prompt: "Question 4: What language is primarily used for styling web pages?",
@@ -37,12 +37,12 @@ export const scavengerSteps: ScavengerStep[] = [
   {
     prompt: "Question 5: What year did the first man land on the moon?",
     answer: "1969",
-    images: ["img_4.png", "img_21.png", "img_10.png", "img_16.png"],
+    images: ["img_4.png", "img_21.png", "img_7.png", "img_16.png"],
   },
   {
     prompt: "Question 6: Which element has the chemical symbol 'O'?",
     answer: "oxygen",
-    images: ["img_7.png", "img_15.png", "img_17.png", "img_19.png"],
+    images: ["img_10.png", "img_15.png", "img_17.png", "img_8.png"],
   },
 ];
 
