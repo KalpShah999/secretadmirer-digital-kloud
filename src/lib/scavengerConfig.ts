@@ -15,8 +15,8 @@ export interface ScavengerStep {
  */
 export const scavengerSteps: ScavengerStep[] = [
   {
-    prompt: "Question 1: What is the capital of France?",
-    answer: "i like you",
+    prompt: "It's become our song,<br>and I love to dance with you,<br>every time it's on.",
+    answer: "dive",
     images: ["img_1.png", "img_9.png", "img_12.png", "img_22.png"],
   },
   {
@@ -30,18 +30,18 @@ export const scavengerSteps: ScavengerStep[] = [
     images: ["img_5.png", "img_23.png", "img_11.png", "img_19.png"],
   },
   {
-    prompt: "Question 4: What language is primarily used for styling web pages?",
-    answer: "will you be mine?",
+    prompt: "To live or to live?<br>What does it mean to live you?<br> Unsure, but I do.",
+    answer: "mine?",
     images: ["img_2.png", "img_14.png", "img_18.png", "img_20.png"],
   },
   {
-    prompt: "Question 5: What year did the first man land on the moon?",
-    answer: "1969",
+    prompt: "We sat at point F,<br>on \"Shell's a Minor Tourist\",<br>what a lovely night.",
+    answer: "monte bello",
     images: ["img_4.png", "img_21.png", "img_7.png", "img_16.png"],
   },
   {
-    prompt: "Question 6: Which element has the chemical symbol 'O'?",
-    answer: "oxygen",
+    prompt: "One two three four five,<br>on the sixth, I fell in love,<br>as we waltzed away.",
+    answer: "i love you my sunshine",
     images: ["img_10.png", "img_15.png", "img_17.png", "img_8.png"],
   },
 ];
