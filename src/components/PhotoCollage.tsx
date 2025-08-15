@@ -30,7 +30,7 @@ export const PhotoCollage: React.FC<CollageProps> = ({ unlockedImages }) => {
   React.useEffect(() => setMounted(true), []);
 
   // Bigger image size
-  const imgClass = "object-cover rounded-lg shadow-md w-64 h-64"; // 16rem square
+  const imgClass = "object-cover rounded-lg shadow-md w-52 h-52"; // 16rem square
 
   const visibleIndices = new Set(
     (mounted ? unlockedImages : []).map((name) => {
@@ -64,7 +64,7 @@ export const PhotoCollage: React.FC<CollageProps> = ({ unlockedImages }) => {
                 className={imgClass}
               />
             ) : (
-              <div className="w-64 h-64 rounded-lg bg-gray-200" />
+              <div className="w-52 h-52 rounded-lg bg-gray-200" />
             )}
           </div>
         );
