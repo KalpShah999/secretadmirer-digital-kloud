@@ -39,10 +39,10 @@ export default function QuestionPage({ params }: PageProps) {
       return;
     }
     
-    // If the hunt is completed, always show the completed page
+    // If the hunt is completed, always show the final page
     if (progress >= scavengerSteps.length) {
-      console.log("Hunt completed, redirecting to /q/completed");
-      router.replace("/q/completed");
+      console.log("Hunt completed, redirecting to /final");
+      router.replace("/final");
       return;
     }
     
@@ -66,7 +66,7 @@ export default function QuestionPage({ params }: PageProps) {
       if (nextIndex < scavengerSteps.length) {
         router.push(`/q/${nextIndex}`);
       } else {
-        router.push(`/q/completed`);
+        router.push(`/final`);
       }
     } else {
       setError("Try again!");

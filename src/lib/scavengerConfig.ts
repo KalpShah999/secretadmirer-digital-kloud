@@ -48,3 +48,9 @@ export const scavengerSteps: ScavengerStep[] = [
 
 export const finalPrompt =
   "The time capsule locked,<br>the day she became my girl,<br>and mine forever.";
+
+/**
+ * Correct answer for the home page date question ("When did you meet him?").
+ * Format: YYYY-MM-DD (e.g. "2024-03-15")
+ */
+export const homeDateAnswer = "2024-11-09";

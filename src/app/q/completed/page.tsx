@@ -1,23 +1,21 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { PhotoCollage } from "@/components/PhotoCollage";
-import { scavengerSteps, finalPrompt } from "@/lib/scavengerConfig";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CompletedPage() {
-  const allImages = scavengerSteps.flatMap((s) => s.images);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/final");
+  }, [router]);
 
   return (
-    <>
-      <PhotoCollage unlockedImages={allImages} />
-      <div className="flex min-h-screen w-full items-center justify-center">
-        <Card className="w-full max-w-md text-center">
-          <h1
-            className="text-2xl font-bold"
-            dangerouslySetInnerHTML={{ __html: finalPrompt }}
-          />
-        </Card>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
+        <p>Loading...</p>
       </div>
-    </>
+    </div>
   );
 }
