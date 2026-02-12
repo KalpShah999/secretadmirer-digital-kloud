@@ -1,26 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeartsBackground } from "@/components/HeartsBackground";
+import { useScavengerProgress } from "@/hooks/useScavengerProgress";
 import { jokeQuestionAnswer } from "@/lib/scavengerConfig";
 
 export default function JokePage() {
   const router = useRouter();
+  const { homeDateCompleted, markJokeCompleted } = useScavengerProgress();
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (homeDateCompleted === null) return;
+    if (!homeDateCompleted) {
+      router.replace("/");
+    }
+  }, [homeDateCompleted, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (answer.trim().toLowerCase() === jokeQuestionAnswer.trim().toLowerCase()) {
+      markJokeCompleted();
       router.push("/q/0");
     } else {
       setError("Try again!");
     }
   };
+
+  if (homeDateCompleted !== true) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+      </div>
+    );
+  }
 
   return (
     <>

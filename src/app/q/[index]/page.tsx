@@ -18,7 +18,7 @@ export default function QuestionPage({ params }: PageProps) {
   const routeParams = React.use(params as any) as { index: string };
   const stepIndex = parseInt(routeParams.index, 10);
   const router = useRouter();
-  const { progress, markStepCompleted } = useScavengerProgress();
+  const { progress, jokeCompleted, markStepCompleted } = useScavengerProgress();
 
   // Consolidated redirect logic
   React.useEffect(() => {
@@ -38,6 +38,12 @@ export default function QuestionPage({ params }: PageProps) {
       router.replace("/q/0");
       return;
     }
+
+    // Step 0 requires joke to be completed first (only redirect when we've loaded the flag)
+    if (stepIndex === 0 && jokeCompleted !== null && !jokeCompleted) {
+      router.replace("/q/joke");
+      return;
+    }
     
     // If the hunt is completed, always show the final page
     if (progress >= scavengerSteps.length) {
@@ -51,7 +57,7 @@ export default function QuestionPage({ params }: PageProps) {
       console.log("Jumping ahead, redirecting to /q/" + progress);
       router.replace(`/q/${progress}`);
     }
-  }, [stepIndex, progress, router]);
+  }, [stepIndex, progress, jokeCompleted, router]);
 
   const step = scavengerSteps[stepIndex];
 

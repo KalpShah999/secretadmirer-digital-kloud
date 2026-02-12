@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { HeartsBackground } from "@/components/HeartsBackground";
+import { useScavengerProgress } from "@/hooks/useScavengerProgress";
 import { defaultPlaceholderDate, homeDateAnswer } from "@/lib/scavengerConfig";
 
 export default function Home() {
   const router = useRouter();
+  const { markHomeDateCompleted } = useScavengerProgress();
   const [date, setDate] = useState(defaultPlaceholderDate);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,6 +22,7 @@ export default function Home() {
       return;
     }
     if (date.trim() === homeDateAnswer) {
+      markHomeDateCompleted();
       router.push("/q/joke");
     } else {
       setError("Try again!");

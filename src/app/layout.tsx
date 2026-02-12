@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { PreloadImages } from "@/components/PreloadImages";
 
 export const metadata: Metadata = {
   title: "Scavenger Hunt",
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       {/* Apply min-h-screen so flex centering works */}
       <body className="min-h-screen bg-background text-foreground">
+        <PreloadImages />
         {children}
       </body>
     </html>

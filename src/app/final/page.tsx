@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { PhotoCollage } from "@/components/PhotoCollage";
 import { HeartsBackground } from "@/components/HeartsBackground";
 import { TypewriterText } from "@/components/TypewriterText";
+import { useScavengerProgress } from "@/hooks/useScavengerProgress";
+import { scavengerSteps } from "@/lib/scavengerConfig";
 
 const ALL_IMAGES = Array.from({ length: 24 }, (_, i) => `img_${i + 1}.png`);
 const PHOTO_REVEAL_DELAY_MS = 100;
@@ -22,8 +25,17 @@ function shuffleArray<T>(array: T[]): T[] {
 const DELAY_AFTER_TYPEWRITER_MS = 500;
 
 export default function FinalPage() {
+  const router = useRouter();
+  const { progress } = useScavengerProgress();
   const [revealedCount, setRevealedCount] = useState(0);
   const [typewriterDone, setTypewriterDone] = useState(false);
+
+  useEffect(() => {
+    if (progress === undefined || progress === null) return;
+    if (progress < scavengerSteps.length) {
+      router.replace(`/q/${Math.min(progress, scavengerSteps.length - 1)}`);
+    }
+  }, [progress, router]);
 
   const handleTypewriterComplete = useCallback(() => {
     setTypewriterDone(true);
@@ -54,6 +66,14 @@ export default function FinalPage() {
 
   const revealOrder = useMemo(() => shuffleArray(ALL_IMAGES), []);
   const displayedImages = revealOrder.slice(0, revealedCount);
+
+  if (progress !== undefined && progress !== null && progress < scavengerSteps.length) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+      </div>
+    );
+  }
 
   return (
     <>

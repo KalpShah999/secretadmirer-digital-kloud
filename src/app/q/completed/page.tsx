@@ -2,13 +2,21 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useScavengerProgress } from "@/hooks/useScavengerProgress";
+import { scavengerSteps } from "@/lib/scavengerConfig";
 
 export default function CompletedPage() {
   const router = useRouter();
+  const { progress } = useScavengerProgress();
 
   useEffect(() => {
-    router.replace("/final");
-  }, [router]);
+    if (progress === undefined || progress === null) return;
+    if (progress >= scavengerSteps.length) {
+      router.replace("/final");
+    } else {
+      router.replace(`/q/${progress}`);
+    }
+  }, [progress, router]);
 
   return (
     <div className="flex min-h-screen items-center justify-center">
