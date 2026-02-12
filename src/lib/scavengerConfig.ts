@@ -15,42 +15,41 @@ export interface ScavengerStep {
  */
 export const scavengerSteps: ScavengerStep[] = [
   {
-    prompt: "It's become our song,<br>and I love to dance with you,<br>every time it's on.",
-    answer: "dive",
+    prompt: "Here's some new breaking news...<br>I MISS YOU 💛<br>It's been too long since I've seen you.<br>When was the last time I saw you again?",
+    answer: "2025-12-02",
     images: ["img_1.png", "img_9.png", "img_12.png", "img_22.png"],
   },
   {
-    prompt: "Under the night sky,<br>no constellations in view,<br>but we sat for hours.",
-    answer: "i live you",
+    prompt: "Too long ago 😭<br>I'm so glad I get to see you so soon!<br>Can't wait for you to run into my arms on...?",
+    answer: "2026-02-26",
     images: ["img_3.png", "img_6.png", "img_13.png", "img_24.png"],
   },
   {
-    prompt: "You are my sunshine,<br>that shines on me every day,<br>and makes me smile.",
-    answer: "light",
+    prompt: "I really wish we could celebreate everything together.<br>It really that our first ___ is going to spent apart from each other.",
+    answer: "2026-02-14",
     images: ["img_5.png", "img_23.png", "img_11.png", "img_19.png"],
   },
   {
-    prompt: "To live or to live?<br>What does it mean to live you?<br> Unsure, but I do.",
-    answer: "mine?",
+    prompt: "I'm asking you for too many dates?<br>Can I ask for one more? 🙃💛",
+    answer: "",
     images: ["img_2.png", "img_14.png", "img_18.png", "img_20.png"],
-  },
-  {
-    prompt: "We sat at point F,<br>on \"Shell's a Minor Tourist\",<br>what a lovely night.",
-    answer: "monte bello",
-    images: ["img_4.png", "img_21.png", "img_7.png", "img_16.png"],
-  },
-  {
-    prompt: "One two three four five,<br>on the sixth, I fell in love,<br>as we waltzed away.",
-    answer: "i love you my sunshine",
-    images: ["img_10.png", "img_15.png", "img_17.png", "img_8.png"],
   },
 ];
 
 export const finalPrompt =
-  "The time capsule locked,<br>the day she became my girl,<br>and mine forever.";
+  "Will you be my valentine?";
+
+/** Default placeholder date for all date inputs. Format: YYYY-MM-DD */
+export const defaultPlaceholderDate = "2026-02-14";
 
 /**
  * Correct answer for the home page date question ("When did you meet him?").
  * Format: YYYY-MM-DD (e.g. "2024-03-15")
  */
 export const homeDateAnswer = "2024-11-09";
+
+/**
+ * Correct answer for the joke question ("Nothing's different tonight? What song is that?").
+ * Case-insensitive. Edit this to match the song title or key lyric.
+ */
+export const jokeQuestionAnswer = "breaking news";

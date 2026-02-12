@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { PhotoCollage } from "@/components/PhotoCollage";
-import { scavengerSteps } from "@/lib/scavengerConfig";
+import { HeartsBackground } from "@/components/HeartsBackground";
+import { defaultPlaceholderDate, scavengerSteps } from "@/lib/scavengerConfig";
 import { useScavengerProgress } from "@/hooks/useScavengerProgress";
 
 interface PageProps {
@@ -55,12 +55,22 @@ export default function QuestionPage({ params }: PageProps) {
 
   const step = scavengerSteps[stepIndex];
 
-  const [answer, setAnswer] = useState("");
+  const isDateStep = stepIndex === 0 || stepIndex === 1 || stepIndex === 2;
+  const isButtonOnlyStep = !step.answer.trim();
+  const [answer, setAnswer] = useState(isDateStep ? defaultPlaceholderDate : "");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (answer.trim().toLowerCase() === step.answer.trim().toLowerCase()) {
+    if (isButtonOnlyStep) {
+      markStepCompleted(stepIndex);
+      router.push("/final");
+      return;
+    }
+    const isCorrect = isDateStep
+      ? answer.trim() === step.answer.trim()
+      : answer.trim().toLowerCase() === step.answer.trim().toLowerCase();
+    if (isCorrect) {
       markStepCompleted(stepIndex);
       const nextIndex = stepIndex + 1;
       if (nextIndex < scavengerSteps.length) {
@@ -73,16 +83,11 @@ export default function QuestionPage({ params }: PageProps) {
     }
   };
 
-  // Determine unlocked images so far
-  const unlockedImages = scavengerSteps
-    .slice(0, progress)
-    .flatMap((s) => s.images);
-
   return (
     <>
-      <PhotoCollage unlockedImages={unlockedImages} />
+      <HeartsBackground />
 
-      <div className="flex min-h-screen w-full items-center justify-center">
+      <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-4">
         <Card className="w-full max-w-md space-y-4 text-center">
           <h1
             className="text-xl font-semibold"
@@ -90,17 +95,20 @@ export default function QuestionPage({ params }: PageProps) {
           />
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              value={answer}
-              onChange={(e) => {
-                setAnswer(e.target.value);
-                if (error) setError(null);
-              }}
-              placeholder="Your answer here"
-            />
+            {!isButtonOnlyStep && (
+              <Input
+                type={isDateStep ? "date" : "text"}
+                value={answer}
+                onChange={(e) => {
+                  setAnswer(e.target.value);
+                  if (error) setError(null);
+                }}
+                placeholder={isDateStep ? undefined : "Your answer here"}
+              />
+            )}
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full">
-              Submit
+              {isButtonOnlyStep ? "Yes please 🙃" : "Submit"}
             </Button>
           </form>
         </Card>
